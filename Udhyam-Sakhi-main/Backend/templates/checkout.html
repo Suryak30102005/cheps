@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+    <h2>Checkout</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Order Summary</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>₹{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>₹{{ item.price * item.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-end">
+                <h4>Total: ₹{{ total }}</h4>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Payment</h4>
+            <div id="razorpay-payment-button"></div>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+            var options = {
+                "key": "{{ key_id }}",
+                "amount": "{{ total * 100 }}",
+                "currency": "INR",
+                "name": "Udhyam Sakhi",
+                "description": "Test Transaction",
+                "order_id": "{{ order_id }}",
+                "handler": function (response){
+                    window.location.href = "/payment_success?payment_id=" + response.razorpay_payment_id + "&order_id=" + response.razorpay_order_id + "&signature=" + response.razorpay_signature;
+                },
+                "prefill": {
+                    "name": "{{ g.user['name'] }}",
+                    "email": "{{ g.user['email'] }}"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            document.getElementById('razorpay-payment-button').onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
+            </script>
+        </div>
+    </div>
+{% endblock %}

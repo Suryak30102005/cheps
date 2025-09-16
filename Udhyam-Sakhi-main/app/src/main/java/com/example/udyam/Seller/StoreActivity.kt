@@ -4,20 +4,33 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.example.udyam.R
 import com.example.udyam.databinding.ActivityStoreBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * An activity where sellers can manage their store details.
+ *
+ * This activity allows sellers to view and update their store information, such as
+ * the store name, address, pincode, and contact details. The data is fetched from
+ * and saved to Firebase Firestore.
+ */
 class StoreActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoreBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [onSaveInstanceState].
+     *     Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,6 +48,9 @@ class StoreActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Fetches the existing store data from Firestore and populates the UI fields.
+     */
     private fun fetchExistingStoreData() {
         val userId = auth.currentUser?.uid
         if (userId != null) {
@@ -56,6 +72,12 @@ class StoreActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Saves the store details entered by the user to Firestore.
+     *
+     * The data is saved in two locations: under the user's document and in a
+     * global 'stores' collection.
+     */
     private fun saveStoreDetails() {
         val storeName = binding.storeNameEt.text.toString().trim()
         val address = binding.stLocationEt.text.toString().trim()

@@ -3,7 +3,6 @@ package com.example.udyam.Seller
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -20,9 +19,24 @@ import com.example.udyam.auth.AuthActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * The main activity for the seller view.
+ *
+ * This activity sets up the main UI for the seller, including a bottom navigation
+ * bar and a navigation drawer. It handles navigation between the different
+ * seller-related fragments.
+ */
 class SellerHomeActivity : AppCompatActivity() {
+
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [onSaveInstanceState].
+     *     Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         // Enable edge-to-edge layout before setContentView
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -30,7 +44,6 @@ class SellerHomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_seller_home)
 
         val auth = FirebaseAuth.getInstance()
-        val firestore = FirebaseFirestore.getInstance()
 
         // Set up NavController
         val navHostFragment =

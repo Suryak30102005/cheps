@@ -14,17 +14,31 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.udyam.R
 import com.example.udyam.auth.AuthActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * The main activity for the buyer's view.
+ *
+ * This activity sets up the main UI for the buyer, including a bottom navigation
+ * bar, a navigation drawer, and a floating action button for WhatsApp. It handles
+ * navigation between the different buyer-related fragments.
+ */
 class BuyerHomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [onSaveInstanceState].
+     *     Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
@@ -133,10 +147,21 @@ class BuyerHomeActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Shows a toast message.
+     *
+     * @param message The message to show.
+     */
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Shows a toast message and then performs an action.
+     *
+     * @param message The message to show.
+     * @param action The action to perform.
+     */
     private inline fun navigateWithToast(message: String, action: () -> Unit) {
         showToast(message)
         action()

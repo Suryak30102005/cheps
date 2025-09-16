@@ -17,6 +17,13 @@ import com.example.udyam.models.Product
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * A fragment that displays the products of the currently logged-in seller.
+ *
+ * This fragment fetches the seller's products from a 'myProducts' sub-collection
+ * in Firestore and displays them in a RecyclerView. It also provides a floating
+ * action button to add new products.
+ */
 class SellerProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentSellerProductsBinding
@@ -26,6 +33,19 @@ class SellerProductsFragment : Fragment() {
     private val db by lazy { FirebaseFirestore.getInstance() }
     private val auth by lazy { FirebaseAuth.getInstance() }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +54,14 @@ class SellerProductsFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,6 +83,9 @@ class SellerProductsFragment : Fragment() {
         }
     }
 
+    /**
+     * Fetches the seller's products from Firestore and updates the RecyclerView.
+     */
     private fun fetchMyProducts() {
         val currentUser = auth.currentUser ?: return
         db.collection("users")

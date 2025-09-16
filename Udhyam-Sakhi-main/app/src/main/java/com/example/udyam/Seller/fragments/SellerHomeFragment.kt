@@ -13,11 +13,31 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
+/**
+ * A fragment that displays the seller's home screen.
+ *
+ * This fragment shows a dashboard with key metrics like total sales, pending orders,
+ * and delivered orders. It also displays a line chart showing the sales trend
+ * for the week.
+ */
 class SellerHomeFragment : Fragment() {
 
     private var _binding: FragmentSellerHomeBinding? = null
     private val binding get() = _binding!!
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +46,14 @@ class SellerHomeFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,6 +66,9 @@ class SellerHomeFragment : Fragment() {
         setupSalesGraph()
     }
 
+    /**
+     * Sets up the sales graph with sample data.
+     */
     private fun setupSalesGraph() {
         // Sample data for each day of the week (Mon to Sun)
         val entries = listOf(
@@ -86,6 +117,10 @@ class SellerHomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Called when the view previously created by [.onCreateView] has
+     * been detached from the fragment.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

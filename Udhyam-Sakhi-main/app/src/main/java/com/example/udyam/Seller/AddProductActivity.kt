@@ -19,6 +19,12 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
+/**
+ * An activity that allows sellers to add a new product.
+ *
+ * This activity provides a form for entering product details, including an image.
+ * The image is uploaded to ImgBB, and the product information is saved to Firebase Firestore.
+ */
 class AddProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddProductBinding
@@ -26,6 +32,14 @@ class AddProductActivity : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
     private val apiKey = "a55a29c04fe50e932764f6e4a1ad0361" // Replace with your actual ImgBB API key
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [onSaveInstanceState].
+     *     Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -57,6 +71,17 @@ class AddProductActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Handles the result of the image picker intent.
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data?.data != null) {
@@ -65,6 +90,11 @@ class AddProductActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Uploads the selected image to ImgBB.
+     *
+     * @param imageUri The URI of the image to upload.
+     */
     private fun uploadImageToImgBB(imageUri: Uri) {
         val inputStream = contentResolver.openInputStream(imageUri)
         val imageBytes = inputStream!!.readBytes()
@@ -109,6 +139,11 @@ class AddProductActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Saves the product details to Firebase Firestore.
+     *
+     * @param imageUrl The URL of the uploaded image.
+     */
     private fun saveProductToFirestore(imageUrl: String) {
         val name = binding.etItemname.text.toString().trim()
         val price = binding.etRate.text.toString().trim()
@@ -166,4 +201,3 @@ class AddProductActivity : AppCompatActivity() {
             }
     }
 }
-//

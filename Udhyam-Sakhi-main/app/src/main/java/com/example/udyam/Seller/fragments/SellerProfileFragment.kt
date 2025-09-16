@@ -14,6 +14,12 @@ import com.example.udyam.databinding.FragmentSellerProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * A fragment that displays the seller's profile information.
+ *
+ * This fragment fetches the seller's data from Firestore and displays it.
+ * It also provides a sign-out button.
+ */
 class SellerProfileFragment : Fragment() {
 
     private var _binding: FragmentSellerProfileBinding? = null
@@ -23,6 +29,19 @@ class SellerProfileFragment : Fragment() {
     private val firestore = FirebaseFirestore.getInstance()
     private lateinit var signOutBtn: Button
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +52,14 @@ class SellerProfileFragment : Fragment() {
 
     }
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchSellerData()
@@ -47,6 +74,9 @@ class SellerProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Fetches the seller's data from Firestore and updates the UI.
+     */
     private fun fetchSellerData() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
@@ -78,10 +108,19 @@ class SellerProfileFragment : Fragment() {
             }
     }
 
+    /**
+     * Shows a toast message.
+     *
+     * @param msg The message to show.
+     */
     private fun showToast(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Called when the view previously created by [.onCreateView] has
+     * been detached from the fragment.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
