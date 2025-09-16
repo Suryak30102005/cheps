@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_dark">#054640</color>    <!-- (5,70,64) -->
+    <color name="primary">#005d4b</color>         <!-- (0,93,75) -->
+    <color name="primary_variant">#06625f</color> <!-- (6,98,95) -->
+
+    <color name="light_gray">#bbbbbb</color>      <!-- (187,187,187) -->
+    <color name="medium_gray">#aaaaaa</color>     <!-- (170,170,170) -->
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="blue">#2196F3</color> <!-- Or any blue you prefer -->
+
+
+    <color name="bottom_nav_background">#06625f</color> <!-- primary_variant -->
+    <color name="card_background">#ffffff</color>         <!-- White for light mode -->
+    <color name="text_primary">#000000</color>           <!-- Black text -->
+    <color name="text_secondary">#666666</color>         <!-- Grey text -->
+    <color name="bg_light">#FAFAFA</color>
+    <color name="bg_button">#E8EAF6</color>
+    <color name="icon_primary">#3F51B5</color>
+
+</resources>

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "174000464177",
+    "firebase_url": "https://hostel-app-b63df-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hostel-app-b63df",
+    "storage_bucket": "hostel-app-b63df.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174000464177:android:84194f65898702ea049010",
+        "android_client_info": {
+          "package_name": "com.example.udyam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWU7DwWI5YbX8IH16iz7SOT0xA6XG1ImA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_buyer"
+    app:startDestination="@id/buyerHomeFragment2">
+    <fragment
+        android:id="@+id/buyerHomeFragment2"
+        android:name="com.example.udyam.Buyer.BuyerHomeFragment"
+        android:label="BuyerHomeFragment" >
+        <action
+            android:id="@+id/action_buyerHomeFragment2_to_buyerProfileFragment2"
+            app:destination="@id/buyerProfileFragment2" />
+        <action
+            android:id="@+id/action_buyerHomeFragment2_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerProfileFragment2"
+        android:name="com.example.udyam.Buyer.BuyerProfileFragment"
+        android:label="fragment_buyer_profile"
+        tools:layout="@layout/fragment_buyer_profile" >
+        <action
+            android:id="@+id/action_buyerProfileFragment2_to_buyerHomeFragment2"
+            app:destination="@id/buyerHomeFragment2" />
+        <action
+            android:id="@+id/action_buyerProfileFragment2_to_buyerProductFragment"
+            app:destination="@id/buyerProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerProductFragment"
+        android:name="com.example.udyam.Buyer.BuyerProductFragment"
+        android:label="fragment_buyer_product"
+        tools:layout="@layout/fragment_buyer_product" >
+        <action
+            android:id="@+id/action_buyerProductFragment_to_buyerHomeFragment2"
+            app:destination="@id/buyerHomeFragment2" />
+        <action
+            android:id="@+id/action_buyerProductFragment_to_buyerProfileFragment2"
+            app:destination="@id/buyerProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerNotifFragment"
+        android:name="com.example.udyam.Buyer.BuyerNotifFragment"
+        android:label="fragment_buyer_notif"
+        tools:layout="@layout/fragment_buyer_notif" />
+</navigation>
