@@ -13,12 +13,32 @@ import com.example.udyam.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * A fragment where users complete their profile information during signup.
+ *
+ * This fragment collects additional user details like address, pincode, contact number, and role.
+ * It then creates a new user in Firebase Authentication and saves the complete profile
+ * to Firestore.
+ */
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +47,14 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,6 +95,17 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Registers a new user with Firebase Authentication and saves their profile to Firestore.
+     *
+     * @param name The user's name.
+     * @param address The user's address.
+     * @param pincode The user's pincode.
+     * @param contact The user's contact number.
+     * @param role The user's role (buyer or seller).
+     * @param email The user's email address.
+     * @param password The user's password.
+     */
     private fun registerUser(
         name: String, address: String, pincode: String,
         contact: String, role: String,
@@ -116,6 +155,11 @@ class ProfileFragment : Fragment() {
             }
     }
 
+    /**
+     * Shows a toast message.
+     *
+     * @param msg The message to show.
+     */
     private fun toast(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }

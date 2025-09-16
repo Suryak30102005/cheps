@@ -20,6 +20,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.firestore.FirebaseFirestore
 
+/**
+ * A fragment that handles user login.
+ *
+ * This fragment provides a form for users to enter their email and password to log in.
+ * It also handles navigation to the signup and password reset screens.
+ * After successful login, it redirects the user to the appropriate home screen
+ * based on their role (buyer or seller).
+ */
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
@@ -27,6 +35,19 @@ class LoginFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private lateinit var progressDialogLogin: ProgressDialog
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +56,14 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -95,6 +124,12 @@ class LoginFragment : Fragment() {
         }
     }
 
+    /**
+     * Signs in the user with the given email and password.
+     *
+     * @param email The user's email address.
+     * @param password The user's password.
+     */
     private fun getTheUserSignedIn(email: String, password: String) {
                 progressDialogLogin.show()
                 progressDialogLogin.setMessage("Signing in")

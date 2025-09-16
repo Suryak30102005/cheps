@@ -14,7 +14,12 @@ import com.example.udyam.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
+/**
+ * A fragment that handles the first step of user signup.
+ *
+ * This fragment collects the user's name, email, and password. After basic validation,
+ * it passes this information to the [ProfileFragment] to complete the registration process.
+ */
 class SignupFragment : Fragment() {
 
     private lateinit var binding : FragmentSignupBinding
@@ -29,15 +34,36 @@ class SignupFragment : Fragment() {
 
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater , R.layout.fragment_signup, container ,false, )
         return binding.root
     }
 
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         SignupPD = ProgressDialog(activity)

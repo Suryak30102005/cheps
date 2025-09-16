@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Seller Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Seller Dashboard</h2>
+    <hr>
+    <h4>My Products</h4>
+    <a href="{{ url_for('add_product') }}" class="btn btn-primary mb-3">Add Product</a>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>Price:</strong> ₹{{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No products yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

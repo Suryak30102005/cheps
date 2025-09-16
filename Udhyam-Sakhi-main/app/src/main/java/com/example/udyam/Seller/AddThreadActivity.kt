@@ -17,8 +17,15 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
+/**
+ * An activity for sellers to create and post new threads.
+ *
+ * This activity allows a seller to write a title and description, attach an image,
+ * and post it as a new thread. The image is uploaded to ImgBB, and the thread
+ * data, including the image URL and user information, is saved to Firestore.
+ */
 class AddThreadActivity : AppCompatActivity() {
-private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
     private lateinit var binding: ActivityAddThreadBinding
     private val PICK_IMAGE_REQUEST = 1
     private var selectedImageUri: Uri? = null
@@ -27,6 +34,14 @@ private lateinit var progressDialog: ProgressDialog
     private val db by lazy { FirebaseFirestore.getInstance() }
     private val auth by lazy { FirebaseAuth.getInstance() }
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in [onSaveInstanceState].
+     *     Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddThreadBinding.inflate(layoutInflater)
@@ -49,6 +64,17 @@ private lateinit var progressDialog: ProgressDialog
         }
     }
 
+    /**
+     * Handles the result from the image picker activity.
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data?.data != null) {
@@ -57,6 +83,11 @@ private lateinit var progressDialog: ProgressDialog
         }
     }
 
+    /**
+     * Uploads the selected image to ImgBB.
+     *
+     * @param imageUri The URI of the image to upload.
+     */
     private fun uploadImageToImgBB(imageUri: Uri) {
         val inputStream = contentResolver.openInputStream(imageUri)
         val imageBytes = inputStream?.readBytes()
@@ -107,6 +138,11 @@ private lateinit var progressDialog: ProgressDialog
         })
     }
 
+    /**
+     * Saves the thread data to Firebase Firestore.
+     *
+     * @param imageUrl The URL of the uploaded image.
+     */
     private fun saveThreadToFirestore(imageUrl: String) {
         val title = binding.etTitle.text.toString().trim()
         val description = binding.etDescription.text.toString().trim()

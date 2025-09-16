@@ -18,7 +18,13 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
+/**
+ * A fragment that displays the seller community feed.
+ *
+ * This fragment shows a list of threads posted by sellers, ordered by timestamp.
+ * It uses a snapshot listener to get real-time updates from Firestore.
+ * A floating action button allows sellers to add new threads.
+ */
 class SellerCommunityFragment : Fragment() {
 
     private lateinit var binding: FragmentSellerCommunityBinding
@@ -26,6 +32,19 @@ class SellerCommunityFragment : Fragment() {
     private val threadList = mutableListOf<UThread>()
     private val db = FirebaseFirestore.getInstance()
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to. The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +53,14 @@ class SellerCommunityFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Called immediately after [.onCreateView] has returned, but before any
+     * saved state has been restored in to the view.
+     *
+     * @param view The View returned by [.onCreateView].
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,6 +81,9 @@ class SellerCommunityFragment : Fragment() {
 
 
 
+    /**
+     * Fetches threads from Firestore in real-time and updates the RecyclerView.
+     */
     private fun fetchThreads() {
         db.collection("threads")
             .orderBy("timestamp", Query.Direction.DESCENDING)

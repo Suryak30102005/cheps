@@ -10,7 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.udyam.R
 import com.example.udyam.databinding.FragmentIntroBinding
 
-
+/**
+ * A fragment that displays an introduction screen to the user.
+ *
+ * This fragment shows a "Get Started" button that navigates the user to the login screen.
+ */
 class IntroFragment : Fragment() {
 
     private lateinit var binding :FragmentIntroBinding
